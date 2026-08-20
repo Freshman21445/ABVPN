@@ -50,8 +50,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     implementation("androidx.datastore:datastore-preferences:1.1.1") // encrypted-at-rest via EncryptedFile wrapper, see data/
-    implementation("androidx.security:security-crypto:1.1.0-alpha06") // EncryptedSharedPreferences for keys/secrets
-
+    implementation("androidx.security:security-crypto:1.1.0")
     // NOTE: real WireGuard tunneling requires the official WireGuard Android library
     // (com.wireguard.android:tunnel), which this prototype does not wire in yet — see README.
     // implementation("com.wireguard.android:tunnel:1.0.20230706")
