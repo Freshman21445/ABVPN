@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+
 package com.abvpn.vpn.ui.screens
 
 import androidx.compose.foundation.layout.*
@@ -12,10 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.abvpn.vpn.data.model.ConnectionState
 import com.abvpn.vpn.viewmodel.VpnConnectionViewModel
 
-/**
- * Home screen: status, one big connect button, selected server, nothing else
- * required to get a beginner connected.
- */
 @Composable
 fun HomeScreen(
     viewModel: VpnConnectionViewModel,
