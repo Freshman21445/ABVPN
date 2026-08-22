@@ -4,6 +4,7 @@ import android.content.Context
 import com.wireguard.android.backend.GoBackend
 import com.wireguard.android.backend.Tunnel
 import com.wireguard.config.Config
+import java.io.BufferedReader
 import java.io.StringReader
 
 class ABVPNTunnel(private val tunnelName: String) : Tunnel {
@@ -35,7 +36,7 @@ PersistentKeepalive = 25
 
     fun connect(context: Context) {
         val be = getBackend(context)
-        val cfg = Config.parse(StringReader(CONFIG_TEXT))
+        val cfg = Config.parse(BufferedReader(StringReader(CONFIG_TEXT)))
         tunnel = ABVPNTunnel("abvpn")
         be.setState(tunnel!!, Tunnel.State.UP, cfg)
     }
