@@ -11,8 +11,8 @@ android {
         applicationId = "com.abvpn.vpn"
         minSdk = 26 // VpnService + modern crypto APIs need reasonably recent Android
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.1.0-prototype"
+        versionCode = 2
+        versionName = "0.1.1"
     }
 
     buildTypes {
