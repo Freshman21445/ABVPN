@@ -53,7 +53,7 @@ dependencies {
     implementation("androidx.security:security-crypto:1.1.0")
     // NOTE: real WireGuard tunneling requires the official WireGuard Android library
     // (com.wireguard.android:tunnel), which this prototype does not wire in yet — see README.
-    // implementation("com.wireguard.android:tunnel:1.0.20230706")
+    implementation("com.wireguard.android:tunnel:1.0.20230706")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
