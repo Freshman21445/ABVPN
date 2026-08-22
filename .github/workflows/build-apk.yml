@@ -1,41 +1,51 @@
-  - name: Set up JDK 17
-    uses: actions/setup-java@v5
-    with:
-      distribution: temurin
-      java-version: '17'
+name: Build APK
 
-  - name: Set up Gradle
-    uses: gradle/actions/setup-gradle@v4
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-  - name: Generate Gradle wrapper
-    run: gradle wrapper --gradle-version 8.7
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
 
-  - name: Grant execute permission
-    run: chmod +x gradlew
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
 
-  - name: Remove placeholder resource files that break aapt
-    run: |
-      echo "Removing invalid placeholder resource files if present"
-      rm -f app/src/main/res/mipmap-mdpi/placeholder.txt || true
-      rm -f app/src/main/res/mipmap-xxxhdpi/placeholder.txt || true
-      echo "Listing mipmap dirs"
-      ls -la app/src/main/res/mipmap-* || true
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-  - name: Build debug APK
-    run: ./gradlew assembleDebug --stacktrace
+      - name: Generate Gradle wrapper
+        run: gradle wrapper --gradle-version 8.7
 
-  - name: Upload APK
-    if: success()
-    uses: actions/upload-artifact@v4
-    with:
-      name: abvpn-debug-apk
-      path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Grant execute permission
+        run: chmod +x gradlew
 
-  - name: Upload build logs on failure
-    if: failure()
-    uses: actions/upload-artifact@v4
-    with:
-      name: build-logs
-      path: |
-        app/build/reports/
-        **/build/outputs/logs/
+      - name: Remove placeholder resource files
+        run: |
+          rm -f app/src/main/res/mipmap-mdpi/placeholder.txt
+          rm -f app/src/main/res/mipmap-xxxhdpi/placeholder.txt
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Upload APK
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: abvpn-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            app/build/reports/
+            **/build/outputs/logs/
