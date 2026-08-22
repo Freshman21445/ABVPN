@@ -34,7 +34,7 @@
              grants it the special TUN-device permissions after the user approves the
              system VPN confirmation dialog (triggered by VpnService.prepare()). -->
         <service
-            android:name=".vpn.ABVPNService"
+            android:name="com.wireguard.android.backend.GoBackend$VpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:exported="false"
             android:foregroundServiceType="specialUse">
